@@ -65,9 +65,9 @@ def task(tokenId: uint256, taskId: uint256):
     @param taskId
         ID of tasks, starting with 0 and ending with END
     """
-    assert self.loogies.ownerOf(tokenId) == msg.sender
-    assert taskId < END
-    assert not self.tasks[tokenId][taskId]
+    assert self.loogies.ownerOf(tokenId) == msg.sender, "You must be owner of this tokenId"
+    assert taskId < END, "Task ID does not exist, try lower task IDs"
+    assert not self.tasks[tokenId][taskId], "Task already completed"
 
     if taskId != 0:
         assert self.tasks[tokenId][taskId - 1], "Complete previous task first"
